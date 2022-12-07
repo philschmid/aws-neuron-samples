@@ -5,7 +5,8 @@ This repository contains instructions/examples/tutorials using the `neuron-sdk` 
 ### Inference
 
 * [Speed up BERT inference with Hugging Face Transformers and AWS Inferentia](https://www.philschmid.de/huggingface-bert-aws-inferentia)
-* [Accelerate Hugging Face Transformers with AWS Inferentia 2]()
+* [Accelerate Hugging Face Transformers with AWS Inferentia 2 | Benchmarking Transformers for AWS Inferentia 2]()
+
 
 ### Training
 
