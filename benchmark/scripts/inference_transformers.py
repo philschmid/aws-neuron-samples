@@ -45,11 +45,18 @@ def parse_args():
     known_args, _ = parser.parse_known_args()  
     return known_args
 
-def compile_model(model, tokenizer, sequence_length, num_neuron_cores):
+def compile_model_inf1(model, tokenizer, sequence_length, num_neuron_cores):
     os.environ['NEURON_RT_NUM_CORES'] = str(num_neuron_cores)
     import torch.neuron
     payload = generate_sample_inputs(tokenizer, sequence_length)
     return torch.neuron.trace(model, payload)
+
+def compile_model_inf2(model, tokenizer, sequence_length, num_neuron_cores):
+    # use only one neuron core
+    os.environ["NEURON_RT_NUM_CORES"] = str(num_neuron_cores)
+    import torch_neuronx
+    payload = generate_sample_inputs(tokenizer, sequence_length)
+    return torch_neuronx.trace(model, payload)
 
 
 def main(args):
@@ -71,8 +78,12 @@ def main(args):
  
     # compile model if neuron
     if args.is_neuron:
-      model = compile_model(model, tokenizer, sequence_length, args.num_neuron_cores)
-    
+      if "inf1" in args.instance_type:
+        model = compile_model_inf1(model, tokenizer, sequence_length, args.num_neuron_cores)
+      elif "inf2" in args.instance_type:
+        model = compile_model_inf2(model, tokenizer, sequence_length, args.num_neuron_cores)
+      else:
+        raise ValueError("Unknown neuron version")
     logger.info(f"Measuring latency for sequence length {sequence_length}")
     res = measure_latency(model, tokenizer, sequence_length)
     print(res)
