@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 pytorch_venv
 neuronxcc*
+all_metrics.csv
