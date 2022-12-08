@@ -5,6 +5,7 @@ from time import perf_counter
 import numpy as np
 import torch
 import csv
+import os
 # Set up logging
 logger = logging.getLogger(__name__)
 
@@ -45,6 +46,7 @@ def parse_args():
     return known_args
 
 def compile_model(model, tokenizer, sequence_length, num_neuron_cores):
+    os.environ['NEURON_RT_NUM_CORES'] = str(num_neuron_cores)
     import torch.neuron
     payload = generate_sample_inputs(tokenizer, sequence_length)
     return torch.neuron.trace(model, payload)
@@ -52,14 +54,7 @@ def compile_model(model, tokenizer, sequence_length, num_neuron_cores):
 
 def main(args):
   print(args)
-  # load tokenizer and  model
-  tokenizer = AutoTokenizer.from_pretrained(args.model_id)
-  model = AutoModelForSequenceClassification.from_pretrained(args.model_id, torchscript=True)
-  
-  # compile model if neuron
-  if args.is_neuron:
-    model = compile_model(model, tokenizer, args.sequence_length, args.num_neuron_cores)
-  
+
   # define sequence lengths to benchmark
   if args.sequence_length is None:
     sequence_lengths = [8,16,32,64,128, 256, 512] 
@@ -69,10 +64,19 @@ def main(args):
   # benchmark model
   benchmark_dict = []
   for sequence_length in sequence_lengths:
+    # load tokenizer and  model
+    tokenizer = AutoTokenizer.from_pretrained(args.model_id)
+    model = AutoModelForSequenceClassification.from_pretrained(args.model_id, torchscript=True)
+    
+ 
+    # compile model if neuron
+    if args.is_neuron:
+      model = compile_model(model, tokenizer, sequence_length, args.num_neuron_cores)
+    
     logger.info(f"Measuring latency for sequence length {sequence_length}")
-    benchmark_dict.append({**measure_latency(model, tokenizer, sequence_length), 
-      "instance_type": args.instance_type,
-    })    
+    res = measure_latency(model, tokenizer, sequence_length)
+    print(res)
+    benchmark_dict.append({**res,"instance_type": args.instance_type})    
   
   # write results to csv
   keys = benchmark_dict[0].keys()
@@ -86,3 +90,8 @@ if __name__ == "__main__":
   
   
 # python scripts/benchmark_transformers.py --model_id bert-base-uncased --instance_type c6i.2xlarge
+# {'time_avg_ms': 8.10589524991883, 'time_std_ms': 0.09509256634579266, 'time_p95_ms': 8.25341524941905, 'sequence_length': 128}
+# {'time_avg_ms': 7.0798250301595544, 'time_std_ms': 0.07013446319476516, 'time_p95_ms': 7.2283735508790405, 'sequence_length': 64}
+# {'time_avg_ms': 7.0568497200838465, 'time_std_ms': 0.06201203367767892, 'time_p95_ms': 7.158065150815674, 'sequence_length': 32}
+# {'time_avg_ms': 8.227177910039245, 'time_std_ms': 0.05096229434436981, 'time_p95_ms': 8.318828549545287, 'sequence_length': 16}
+# {'time_avg_ms': 6.88982284003032, 'time_std_ms': 0.03838955933742761, 'time_p95_ms': 6.972277099521307, 'sequence_length': 8}
