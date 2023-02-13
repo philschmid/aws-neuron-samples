@@ -18,16 +18,3 @@ python scripts/inference_transformers_vision.py --model_id google/vit-base-patch
 
 # albert-base-v2
 python scripts/inference_transformers.py --model_id albert-base-v2 --instance_type inf2.xlarge --is_neuron
-
-# albert-large-v2
-python scripts/inference_transformers.py --model_id albert-large-v2 --instance_type inf2.xlarge --is_neuron
-
-# nreimers/MiniLMv2-L6-H768-distilled-from-RoBERTa-Large
-python scripts/inference_transformers.py --model_id nreimers/MiniLMv2-L6-H768-distilled-from-RoBERTa-Large --instance_type inf2.xlarge --is_neuron
-
-# nreimers/MiniLMv2-L12-H384-distilled-from-RoBERTa-Large
-python scripts/inference_transformers.py --model_id nreimers/MiniLMv2-L12-H384-distilled-from-RoBERTa-Large --instance_type inf2.xlarge --is_neuron
-
-# nreimers/MiniLMv2-L12-H384-distilled-from-RoBERTa-Large
-python scripts/inference_transformers.py --model_id nreimers/MiniLMv2-L12-H384-distilled-from-RoBERTa-Large --instance_type inf2.xlarge --is_neuron
-
