@@ -25,3 +25,12 @@ Before we can start make sure you have met the following requirements
 * AWS Account with quota for `Inf1`, `Inf2`, `Trn1` instances.
 * [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed
 * AWS IAM user [configured in CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) with permission to create and manage ec2 instances
+
+
+## Start environment
+
+inf2:
+
+```bash
+source ../aws_neuron_venv_pytorch_p37/bin/activate
+```

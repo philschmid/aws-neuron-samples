@@ -47,14 +47,33 @@ Result tables
 
 | Sequence Length | CPU (c6i.2xlarge) | Inf1 (inf1.2xlarge) | Inf2 (inf2.2xlarge) |
 | --------------- | ----------------- | ------------------- | ------------------- |
-| 8               | 10ms              | 3.4ms               |                     |
-| 16              | 11ms              | 3.5ms               |                     |
-| 32              | 14.4ms            | 3.6ms               |                     |
-| 64              | 18.9ms            | 3.7ms               |                     |
-| 128             | 27.4ms            | 3.9ms               |                     |
-| 256             | 52.3ms            | 5.7ms               |                     |
-| 512             | 108.1ms           | 13.7ms              |                     |
+| 8               | 10ms              | 3.4ms               |  0.63ms                   |
+| 16              | 11ms              | 3.5ms               |  0.63ms                   |
+| 32              | 14.4ms            | 3.6ms               |  0.64ms                   |
+| 64              | 18.9ms            | 3.7ms               |  0.67ms                   |
+| 128             | 27.4ms            | 3.9ms               |  0.80ms                   |
+| 256             | 52.3ms            | 5.7ms               |  1.40ms                   |
+| 512             | 108.1ms           | 13.7ms              |  3.12ms                   |
 
+## AlBERT [albert-base-v2](https://huggingface.co/albert-base-v2) / p95 latency
+
+| Sequence Length | CPU (c6i.2xlarge) | Inf1 (inf1.2xlarge) | Inf2 (inf2.2xlarge) |
+| --------------- | ----------------- | ------------------- | ------------------- |
+| 8               |               |                |           1.37ms          |
+| 16              |               |                |           1.43ms          |
+| 32              |             |                |             1.42ms        |
+| 64              |             |                |             1.43ms        |
+| 128             |             |                |             1.72ms        |
+| 256             |             |                |             3.33ms        |
+| 512             |           |               |                7.55ms     |
+
+# Vision models
+
+## Vision Transformer [google/vit-base-patch16-224](https://huggingface.co/google/vit-base-patch16-224) / p95 latency
+
+| Image size | CPU (c6i.2xlarge) | Inf1 (inf1.2xlarge) | Inf2 (inf2.2xlarge) |
+| --------------- | ----------------- | ------------------- | ------------------- |
+| 3x224x224               |               |                |         3.55ms            |
 
 
 

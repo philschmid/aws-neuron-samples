@@ -36,7 +36,7 @@ paraphrase_reference_logits = model(*paraphrase)[0]
 neuron_model = torch_neuronx.trace(model, paraphrase)
 
 # Verify the TorchScript works on both example inputs
-paraphrase_neuron_logits = neuron_model(*paraphrase)
+paraphrase_neuron_logits = neuron_model(*paraphrase)[0]
 
 # compare results
 print('Reference Logits:    ', paraphrase_reference_logits.detach().numpy())

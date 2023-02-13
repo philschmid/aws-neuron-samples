@@ -1,5 +1,7 @@
 transformers==4.25.1
 protobuf==3.20.1
+datasets 
+pillow==9.4.0
 
 # Install packages from repos
 --extra-index-url https://pip.repos.neuron.amazonaws.com
