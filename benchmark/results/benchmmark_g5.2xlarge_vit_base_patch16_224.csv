@@ -1,0 +1,2 @@
+time_avg_ms,time_std_ms,time_p95_ms,instance_type
+7.208765140003379,0.06792229727627411,7.300073449982847,g5.2xlarge

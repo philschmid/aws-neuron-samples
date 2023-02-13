@@ -7,9 +7,6 @@ python scripts/inference_transformers.py --model_id bert-large-uncased --instanc
 # roberta-base
 python scripts/inference_transformers.py --model_id roberta-base --instance_type inf1.2xlarge --is_neuron
 
-# roberta-large
-python scripts/inference_transformers.py --model_id roberta-large --instance_type inf1.2xlarge --is_neuron
-
 # google/vit-base-patch16-224
 python scripts/inference_transformers_vision.py --model_id google/vit-base-patch16-224 --instance_type inf1.xlarge --is_neuron
 
