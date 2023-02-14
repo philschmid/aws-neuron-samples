@@ -64,7 +64,8 @@ def main(args):
 
   # define sequence lengths to benchmark
   if args.sequence_length is None:
-    sequence_lengths = [8,16,32,64,128, 256, 512] 
+    # sequence_lengths = [8,16,32,64,128, 256, 512] 
+    sequence_lengths = [ 512] 
   else:
     sequence_lengths = [args.sequence_length]
 
