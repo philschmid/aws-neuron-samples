@@ -59,20 +59,20 @@ Result tables
 
 | Sequence Length | CPU (c6i.2xlarge) | GPU A10G (5.2xlarge) | Inf1 (inf1.2xlarge) | Inf2 (inf2.2xlarge) |
 |-----------------|-------------------|----------------------|---------------------|---------------------|
-| 8               | 18.56ms           | 9.20ms               |                     | 1.37ms              |
-| 16              | 26.66ms           | 9.25ms               |                     | 1.43ms              |
-| 32              | 33.38ms           | 9.17ms               |                     | 1.42ms              |
-| 64              | 46.11ms           | 9.19ms               |                     | 1.43ms              |
-| 128             | 77.24ms           | 9.26ms               |                     | 1.72ms              |
-| 256             | 148.67ms          | 9.19ms               |                     | 3.33ms              |
-| 512             | 279.56ms          | 12.60ms              |                     | 7.55ms              |
+| 8               | 18.56ms           | 9.20ms               |  3.75ms                   | 1.37ms              |
+| 16              | 26.66ms           | 9.25ms               |  3.78ms                   | 1.43ms              |
+| 32              | 33.38ms           | 9.17ms               |  3.79ms                   | 1.42ms              |
+| 64              | 46.11ms           | 9.19ms               |  4.0ms                   | 1.43ms              |
+| 128             | 77.24ms           | 9.26ms               |  4.88ms                   | 1.72ms              |
+| 256             | 148.67ms          | 9.19ms               |   8.33ms                  | 3.33ms              |
+| 512             | 279.56ms          | 12.60ms              |   18.5ms                  | 7.55ms              |
 # Vision models
 
 ## Vision Transformer [google/vit-base-patch16-224](https://huggingface.co/google/vit-base-patch16-224) / p95 latency
 
 | Image size | CPU (c6i.2xlarge) | GPU A10G (5.2xlarge) | Inf1 (inf1.2xlarge) | Inf2 (inf2.2xlarge) |
 |------------|-------------------|----------------------|---------------------|---------------------|
-| 3x224x224  | 91.3ms            | 7.3ms                |                     | 3.55ms              |
+| 3x224x224  | 91.3ms            | 7.3ms                |  9.48ms                   | 3.55ms              |
 
 
 
