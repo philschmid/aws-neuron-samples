@@ -130,3 +130,6 @@ dmypy.json
 pytorch_venv
 neuronxcc*
 all_metrics.csv
+
+dataset/
+run1/
