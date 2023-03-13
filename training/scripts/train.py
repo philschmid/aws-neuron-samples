@@ -96,7 +96,6 @@ def training_function(args):
         output_dir=output_dir,
         per_device_train_batch_size=args.per_device_train_batch_size,
         per_device_eval_batch_size=args.per_device_eval_batch_size,
-        fp16=False,  # T5 overflows with fp16
         bf16=args.bf16,  # Use BF16 if available
         learning_rate=args.lr,
         num_train_epochs=args.epochs,
