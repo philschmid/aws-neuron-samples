@@ -38,7 +38,7 @@ def parse_arge():
     parser.add_argument("--epochs", type=int, default=3, help="Number of epochs to train for.")
     parser.add_argument("--per_device_train_batch_size", type=int, default=8, help="Batch size to use for training.")
     parser.add_argument("--per_device_eval_batch_size", type=int, default=8, help="Batch size to use for testing.")
-    parser.add_argument("--lr", type=float, default=3e-3, help="Learning rate to use for training.")
+    parser.add_argument("--lr", type=float, default=5e-5, help="Learning rate to use for training.")
     parser.add_argument("--seed", type=int, default=42, help="Seed to use for training.")
     parser.add_argument(
         "--bf16",
@@ -106,8 +106,6 @@ def training_function(args):
         evaluation_strategy="epoch",
         save_strategy="epoch",
         save_total_limit=2,
-        load_best_model_at_end=True,
-        metric_for_best_model="f1",
         # push to hub parameters
         report_to="tensorboard",
         push_to_hub=True if args.repository_id else False,
@@ -127,6 +125,10 @@ def training_function(args):
 
     # Start training
     trainer.train()
+
+    eval_res = trainer.evaluate(eval_dataset=eval_dataset)
+
+    print(eval_res)
 
     # Save our tokenizer and create model card
     tokenizer.save_pretrained(output_dir)
