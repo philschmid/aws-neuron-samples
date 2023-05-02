@@ -88,9 +88,8 @@ def training_function(args):
     )
 
     # Define training args
-    # output_dir = args.repository_id if args.repository_id else args.model_id.split("/")[-1]
-    # output_dir = args.model_id.split("/")[-1]
-    output_dir = "run1"
+    output_dir = args.model_id.split("/")[-1] if "/" in args.model_id else args.model_id
+    output_dir = f"{output_dir}-finetuned"
     training_args = TrainingArguments(
         overwrite_output_dir=True,
         output_dir=output_dir,
