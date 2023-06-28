@@ -13,7 +13,7 @@ import evaluate
 import numpy as np
 import logging 
 from huggingface_hub import HfFolder
-from transformers import TrainingArguments
+from optimum.neuron import TrainiumTrainingArguments as TrainingArguments
 from optimum.neuron import TrainiumTrainer as Trainer
 
 
